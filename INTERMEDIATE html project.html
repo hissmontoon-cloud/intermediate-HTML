@@ -1,0 +1,538 @@
+<script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />j
+  
+  <!-- Google Fonts: Inter <!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MeTube - Modern Online Search Hub</title>
+  
+  <!-- Tailwind CSS CDN -->-->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f5f3ff',
+              100: '#ede9fe',
+              500: '#6366f1',
+              600: '#7c3aed',
+              700: '#6d28d9',
+              900: '#4c1d95',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Glassmorphism & Accent Glow Styles */
+    .glass-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-nav {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glow-purple {
+      box-shadow: 0 0 25px -5px rgba(124, 58, 237, 0.4);
+    }
+    .glow-input:focus-within {
+      box-shadow: 0 0 20px 2px rgba(99, 102, 241, 0.35);
+    }
+    /* Hide scrollbar for clean aesthetics */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-brand-600 selection:text-white">
+
+  <!-- ================= HEADER / STICKY NAV ================= -->
+  <header class="sticky top-0 z-50 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#home" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-500 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-200">
+          <span class="font-extrabold text-lg text-white tracking-wider">||</span>
+        </div>
+        <span class="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-brand-500 bg-clip-text text-transparent">
+          MeTube
+        </span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-slate-300">
+        <a href="#home" class="hover:text-white hover:scale-105 transition-all">Home Page</a>
+        <a href="#about" class="hover:text-white hover:scale-105 transition-all">Social Media Info</a>
+        <a href="#aboutMeTube" class="hover:text-white hover:scale-105 transition-all">About MeTube</a>
+        <a href="#contact" class="px-5 py-2.5 rounded-full bg-brand-600 hover:bg-brand-700 text-white font-semibold transition-all shadow-md hover:shadow-brand-500/20 hover:shadow-lg">
+          Contact Us
+        </a>
+      </nav>
+
+      <!-- Mobile Menu Toggle Button -->
+      <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-300 hover:text-white focus:outline-none" aria-label="Toggle Navigation Menu">
+        <i class="fa-solid fa-bars text-xl"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="hidden md:hidden px-6 pt-2 pb-6 space-y-3 bg-slate-900/95 border-b border-slate-800">
+      <a href="#home" class="block py-2 text-slate-300 hover:text-white font-medium mobile-link">Home Page</a>
+      <a href="#about" class="block py-2 text-slate-300 hover:text-white font-medium mobile-link">Social Media Info</a>
+      <a href="#aboutMeTube" class="block py-2 text-slate-300 hover:text-white font-medium mobile-link">About MeTube</a>
+      <a href="#contact" class="block py-2 text-brand-500 font-semibold mobile-link">Contact</a>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    
+    <!-- ================= HERO & SEARCH SECTION (#home) ================= -->
+    <section id="home" class="relative py-24 md:py-32 px-4 overflow-hidden flex flex-col items-center justify-center text-center">
+      
+      <!-- Background Decorative Light Blurs -->
+      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-600/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute top-1/3 left-1/3 w-64 h-64 bg-indigo-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 max-w-3xl w-full mx-auto space-y-8">
+        
+        <!-- Hero Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card text-brand-500 text-xs font-semibold uppercase tracking-wider border border-brand-500/30">
+          <i class="fa-solid fa-bolt text-yellow-400"></i> Instant Music & Video Search
+        </div>
+
+        <!-- Heading -->
+        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
+          Search Any Song or Video <br class="hidden sm:inline" />
+          <span class="bg-gradient-to-r from-brand-500 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+            In Seconds
+          </span>
+        </h1>
+
+        <!-- Subheading -->
+        <p class="text-base sm:text-lg text-slate-400 max-w-xl mx-auto font-normal">
+          Type your favorite track, artist, or music vibe below to jump directly into YouTube's search stream.
+        </p>
+
+        <!-- Search Form -->
+        <form id="searchForm" action="https://www.youtube.com/results" method="GET" target="_blank" class="w-full max-w-2xl mx-auto space-y-4">
+          <div class="relative flex items-center glow-input transition-all duration-300 rounded-2xl">
+            <div class="absolute left-4 text-slate-400">
+              <i class="fa-solid fa-magnifying-glass text-lg"></i>
+            </div>
+            
+            <input 
+              type="text" 
+              id="searchInput" 
+              name="search_query" 
+              placeholder="Type a song, artist, or lyric..." 
+              required
+              class="w-full pl-12 pr-4 py-4 rounded-2xl bg-slate-900/90 text-white placeholder-slate-500 border border-slate-700/80 focus:border-brand-500 focus:outline-none text-base transition-all duration-200"
+            />
+          </div>
+
+          <!-- Form Buttons -->
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+            <button 
+              type="submit" 
+              class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-700 hover:to-indigo-700 text-white font-semibold transition-all transform hover:-translate-y-0.5 shadow-lg shadow-brand-600/25 flex items-center justify-center gap-2"
+            >
+              <i class="fa-brands fa-youtube text-lg text-red-500"></i>
+              YouTube Search
+            </button>
+            
+            <button 
+              type="button" 
+              id="moodBtn" 
+              class="w-full sm:w-auto px-8 py-3.5 rounded-xl glass-card hover:bg-slate-800 text-slate-200 font-semibold border border-slate-700 transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2 group"
+            >
+              <i class="fa-solid fa-dice-five text-brand-500 group-hover:rotate-180 transition-transform duration-500"></i>
+              I'm On My Mood
+            </button>
+          </div>
+        </form>
+
+        <p class="text-xs text-slate-500 pt-4 flex items-center justify-center gap-2">
+          <i class="fa-solid fa-angles-down animate-bounce"></i> Scroll down to discover more features
+        </p>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="max-w-7xl mx-auto px-4"><div class="h-px bg-slate-800/80 w-full"></div></div>
+
+    <!-- ================= SOCIAL MEDIA COMPARISON (#about) ================= -->
+    <section id="about" class="py-20 px-4 max-w-7xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+        <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">Most Famous Social Media</h2>
+        <p class="text-slate-400 text-sm sm:text-base">Compare leading platforms and see where video content thrives online.</p>
+      </div>
+
+      <!-- Modern Responsive Card Grid (Replaces Legacy Table) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Card 1: YouTube -->
+        <div class="glass-card rounded-2xl p-6 flex flex-col justify-between hover:border-brand-500/50 transition-all duration-300 hover:-translate-y-1.5 group">
+          <div class="space-y-4">
+            <div class="h-44 w-full rounded-xl overflow-hidden bg-slate-900 relative">
+              <img 
+                src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=600&q=80" 
+                alt="YouTube Overview" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                onerror="this.src='https://placehold.co/600x400/1e293b/ffffff?text=YouTube';"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+              <span class="absolute bottom-3 left-3 bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded-md flex items-center gap-1">
+                <i class="fa-brands fa-youtube"></i> YouTube
+              </span>
+            </div>
+            <h3 class="text-xl font-bold text-white">YouTube</h3>
+            <div class="text-sm text-slate-300 space-y-2">
+              <p class="font-semibold text-brand-500 text-xs uppercase tracking-wider">Core Focus:</p>
+              <p class="text-slate-400 leading-relaxed">
+                Long-form video content, music streaming, vlogs, live broadcasts, and comprehensive educational tutorials.
+              </p>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-slate-800/80 mt-6 flex items-center justify-between text-xs text-slate-400">
+            <span>Video Hub</span>
+            <span class="text-emerald-400 font-medium"><i class="fa-solid fa-chart-line"></i> Very High Traffic</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Google -->
+        <div class="glass-card rounded-2xl p-6 flex flex-col justify-between hover:border-brand-500/50 transition-all duration-300 hover:-translate-y-1.5 group">
+          <div class="space-y-4">
+            <div class="h-44 w-full rounded-xl overflow-hidden bg-slate-900 relative">
+              <img 
+                src="https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?auto=format&fit=crop&w=600&q=80" 
+                alt="Google Search Overview" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                onerror="this.src='https://placehold.co/600x400/1e293b/ffffff?text=Google';"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+              <span class="absolute bottom-3 left-3 bg-blue-600 text-white text-xs font-bold px-2.5 py-1 rounded-md flex items-center gap-1">
+                <i class="fa-brands fa-google"></i> Google
+              </span>
+            </div>
+            <h3 class="text-xl font-bold text-white">Google</h3>
+            <div class="text-sm text-slate-300 space-y-2">
+              <p class="font-semibold text-brand-500 text-xs uppercase tracking-wider">Core Focus:</p>
+              <p class="text-slate-400 leading-relaxed">
+                Indexing the open web, including news articles, documentation, visual galleries, and global search engines.
+              </p>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-slate-800/80 mt-6 flex items-center justify-between text-xs text-slate-400">
+            <span>Web Search</span>
+            <span class="text-emerald-400 font-medium"><i class="fa-solid fa-globe"></i> Global Standard</span>
+          </div>
+        </div>
+
+        <!-- Card 3: TikTok -->
+        <div class="glass-card rounded-2xl p-6 flex flex-col justify-between hover:border-brand-500/50 transition-all duration-300 hover:-translate-y-1.5 group">
+          <div class="space-y-4">
+            <div class="h-44 w-full rounded-xl overflow-hidden bg-slate-900 relative">
+              <img 
+                src="https://images.unsplash.com/photo-1611605698335-8b1569810432?auto=format&fit=crop&w=600&q=80" 
+                alt="TikTok Overview" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                onerror="this.src='https://placehold.co/600x400/1e293b/ffffff?text=TikTok';"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+              <span class="absolute bottom-3 left-3 bg-pink-600 text-white text-xs font-bold px-2.5 py-1 rounded-md flex items-center gap-1">
+                <i class="fa-brands fa-tiktok"></i> TikTok
+              </span>
+            </div>
+            <h3 class="text-xl font-bold text-white">TikTok</h3>
+            <div class="text-sm text-slate-300 space-y-2">
+              <p class="font-semibold text-brand-500 text-xs uppercase tracking-wider">Core Focus:</p>
+              <p class="text-slate-400 leading-relaxed">
+                Short-form vertical video clips driven by viral soundtrack clips, creative trends, and algorithm recommendations.
+              </p>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-slate-800/80 mt-6 flex items-center justify-between text-xs text-slate-400">
+            <span>Short Video</span>
+            <span class="text-pink-400 font-medium"><i class="fa-solid fa-fire"></i> Viral Trends</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Call To Action Banner -->
+      <div class="mt-16 rounded-3xl bg-gradient-to-r from-brand-900/60 via-purple-900/40 to-slate-900 border border-brand-500/30 p-8 sm:p-12 text-center glow-purple">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-3">Ready for a cleaner video experience?</h2>
+        <p class="text-indigo-200 text-sm sm:text-base max-w-xl mx-auto mb-8">
+          Discover why MeTube is built with simplicity, focus, and rapid searching in mind.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="#contact" class="px-6 py-3 rounded-full bg-white text-brand-700 font-bold hover:bg-slate-100 transition-all shadow-md">
+            Contact ME ↓
+          </a>
+          <a href="#home" class="px-6 py-3 rounded-full glass-card text-white font-bold hover:bg-white/10 border border-white/20 transition-all">
+            Go to Search ↑
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="max-w-7xl mx-auto px-4"><div class="h-px bg-slate-800/80 w-full"></div></div>
+
+    <!-- ================= ABOUT METUBE SECTION (#aboutMeTube) ================= -->
+    <section id="aboutMeTube" class="py-20 px-4 max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        
+        <!-- Showcase Content -->
+        <div class="space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-brand-500/10 text-brand-400 text-xs font-bold uppercase tracking-wider border border-brand-500/20">
+            Platform Capabilities
+          </div>
+          
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+            About <span class="bg-gradient-to-r from-brand-400 to-indigo-400 bg-clip-text text-transparent">MeTube</span>
+          </h2>
+          
+          <p class="text-slate-400 leading-relaxed text-base">
+            MeTube acts as your direct doorway to musical inspiration. Built for users who want zero distractions and quick access to media search results.
+          </p>
+
+          <!-- Feature List Cards -->
+          <div class="space-y-4 pt-2">
+            <div class="glass-card p-4 rounded-xl flex items-start gap-4 border border-slate-800">
+              <div class="p-3 rounded-lg bg-brand-600/20 text-brand-400 shrink-0">
+                <i class="fa-solid fa-bolt-lightning text-xl"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-white text-base">Instant Search</h4>
+                <p class="text-xs sm:text-sm text-slate-400 mt-1">
+                  Type any song title, artist, or snippet lyric to land directly on YouTube's top media results.
+                </p>
+              </div>
+            </div>
+
+            <div class="glass-card p-4 rounded-xl flex items-start gap-4 border border-slate-800">
+              <div class="p-3 rounded-lg bg-indigo-600/20 text-indigo-400 shrink-0">
+                <i class="fa-solid fa-play text-xl"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-white text-base">Seamless Playback</h4>
+                <p class="text-xs sm:text-sm text-slate-400 mt-1">
+                  Jump directly to high-quality video playback and stream uninterrupted audio with zero extra clutter.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Media Graphic -->
+        <div class="relative flex justify-center">
+          <div class="absolute inset-0 bg-brand-600/20 rounded-3xl blur-2xl"></div>
+          <div class="relative glass-card p-4 sm:p-6 rounded-3xl border border-slate-700 max-w-md w-full">
+            <img 
+              src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=700&q=80" 
+              alt="MeTube Audio Experience" 
+              class="rounded-2xl w-full h-64 object-cover shadow-2xl"
+              onerror="this.src='https://placehold.co/700x500/1e293b/ffffff?text=MeTube+Audio';"
+            />
+            <div class="mt-4 flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
+                <span class="text-xs font-semibold text-slate-300">Fast & Optimized Engine</span>
+              </div>
+              <span class="text-xs text-brand-400 font-bold">v2.0 Active</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="max-w-7xl mx-auto px-4"><div class="h-px bg-slate-800/80 w-full"></div></div>
+
+    <!-- ================= CONTACT SECTION (#contact) ================= -->
+    <section id="contact" class="py-20 px-4 max-w-7xl mx-auto">
+      <div class="max-w-xl mx-auto">
+        
+        <div class="text-center mb-10 space-y-2">
+          <h2 class="text-3xl font-extrabold text-white">Contact MeTube</h2>
+          <p class="text-slate-400 text-sm">Have feedback or feature recommendations? Drop us a line.</p>
+        </div>
+
+        <!-- Contact Form Card -->
+        <div class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-800 shadow-2xl">
+          <form id="contactForm" class="space-y-5">
+            <div>
+              <label for="contactName" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Your Name</label>
+              <input 
+                type="text" 
+                id="contactName" 
+                required 
+                placeholder="John Doe"
+                class="w-full px-4 py-3 rounded-xl bg-slate-900/90 text-white placeholder-slate-500 border border-slate-700 focus:border-brand-500 focus:outline-none text-sm transition-all"
+              />
+            </div>
+
+            <div>
+              <label for="contactEmail" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Your Email</label>
+              <input 
+                type="email" 
+                id="contactEmail" 
+                required 
+                placeholder="john@example.com"
+                class="w-full px-4 py-3 rounded-xl bg-slate-900/90 text-white placeholder-slate-500 border border-slate-700 focus:border-brand-500 focus:outline-none text-sm transition-all"
+              />
+            </div>
+
+            <div>
+              <label for="contactMessage" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Message</label>
+              <textarea 
+                id="contactMessage" 
+                rows="4" 
+                required 
+                placeholder="Type your message here..."
+                class="w-full px-4 py-3 rounded-xl bg-slate-900/90 text-white placeholder-slate-500 border border-slate-700 focus:border-brand-500 focus:outline-none text-sm transition-all resize-none"
+              ></textarea>
+            </div>
+
+            <button 
+              type="submit" 
+              class="w-full py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold transition-all shadow-lg shadow-brand-600/30 flex items-center justify-center gap-2"
+            >
+              <i class="fa-solid fa-paper-plane"></i> Send Message
+            </button>
+          </form>
+
+          <!-- Notification Toast Box -->
+          <div id="formSuccessToast" class="hidden mt-4 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-center text-sm font-semibold">
+            <i class="fa-solid fa-circle-check mr-1"></i> Thank you! Your message has been sent successfully.
+          </div>
+
+          <!-- Priority / Premium Link -->
+          <div class="mt-6 text-center pt-6 border-t border-slate-800 text-xs text-slate-400">
+            Need priority assistance? 
+            <a href="#contact" onclick="alert('Premium Support Features Coming Soon!')" class="text-brand-400 font-bold hover:underline ml-1">
+              Go Premium <i class="fa-solid fa-crown text-yellow-400 ml-0.5"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-slate-950 border-t border-slate-900 py-8 px-4 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto space-y-3">
+      <div class="flex justify-center items-center gap-2 font-bold text-slate-400 text-sm">
+        <span>|| MeTube Hub</span>
+      </div>
+      <p>© 2026 MeTube Search Portal. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ================= JAVASCRIPT LOGIC ================= -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // Mobile menu toggle
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const mobileLinks = document.querySelectorAll('.mobile-link');
+
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+        });
+      });
+
+      // Trending Vibe Moods for "I'm On My Mood" button
+      const moods = [
+        "Chill Lofi Beats for Studying",
+        "Synthwave 80s Retro Hits",
+        "Acoustic Pop Hits 2026",
+        "Upbeat Workout Playlist",
+        "Relaxing Jazz & Rain Sounds",
+        "Epic Gaming Soundtracks",
+        "90s Rock Classics Hits",
+        "Deep House Chillout Lounge"
+      ];
+
+      const moodBtn = document.getElementById('moodBtn');
+      const searchInput = document.getElementById('searchInput');
+      const searchForm = document.getElementById('searchForm');
+
+      moodBtn.addEventListener('click', () => {
+        // Pick a random mood
+        const randomMood = moods[Math.floor(Math.random() * moods.length)];
+        searchInput.value = randomMood;
+        
+        // Visual indicator on search bar
+        searchInput.classList.add('ring-2', 'ring-brand-500');
+        setTimeout(() => {
+          searchInput.classList.remove('ring-2', 'ring-brand-500');
+        }, 800);
+
+        // Submit form after populating
+        setTimeout(() => {
+          searchForm.submit();
+        }, 400);
+      });
+
+      // Contact Form Simulated Submission (Replaces alerts)
+      const contactForm = document.getElementById('contactForm');
+      const formSuccessToast = document.getElementById('formSuccessToast');
+
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Show success state
+        formSuccessToast.classList.remove('hidden');
+        contactForm.reset();
+
+        // Hide toast message after 4 seconds
+        setTimeout(() => {
+          formSuccessToast.classList.add('hidden');
+        }, 4000);
+      });
+
+    });
+  </script>
+</body>
+</html>
